@@ -1,0 +1,81 @@
+{% extends "layout.html" %} <!-- child file of layout.html that inherits from template layout.html-->
+
+{% block button %} <!-- in the child the order of blocks does not matter-->
+    <a class="add-pet-btn" href="{{ url_for('add_pet') }}" alt="Add Pet">
+        <i class="fas fa-plus"></i>
+        Pet
+    </a>
+
+<button id="loginBtn" class="login-btn">Login</button>
+{% endblock %}
+
+{% block content %}
+    <section id="pet-cards">
+        {% for pet in pets %}
+            <a href="{{ url_for('pet', id=pet.id) }}"> <!-- @app.route("/pet") pass information without using a new route in app.py-->
+                <div class="card">
+                    <img src="{{ pet.url }}" alt="{{ pet.url_tag }}">
+                    <h2>{{ pet.name }}</h2>
+                    <h3>{{ pet.age }}</h3>
+                    <p>{{ pet.description }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </section>
+    <div id="loginModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+                                background:#fff; padding:20px; border:1px solid #ccc; z-index:1000;">
+        <form method="POST" action="{{ url_for('login') }}">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+
+            <label for="password">Password:</label>
+            <div style="position: relative;">
+                <input type="password" id="password" name="password" required>
+                <button type="button" id="togglePassword" style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%);">
+                    Show
+                </button>
+            </div>
+
+            <button type="submit">Login</button>
+            <button type="button" id="closeModal">Cancel</button>
+        </form>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script>
+    // Modal Elements
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeModal = document.getElementById('closeModal');
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    // Open Modal
+    loginBtn.onclick = () => {
+        loginModal.style.display = 'flex';
+    };
+
+    // Close Modal
+    closeModal.onclick = () => {
+        loginModal.style.display = 'none';
+        passwordInput.type = 'password';
+        togglePassword.textContent = 'Show';
+    };
+
+    // Toggle Password Visibility
+    togglePassword.onclick = () => {
+        const type = passwordInput.type === 'password' ? 'text' : 'password';
+        passwordInput.type = type;
+        togglePassword.textContent = type === 'password' ? 'Show' : 'Hide';
+    };
+
+    // Close modal if click outside content
+    window.onclick = (event) => {
+        if (event.target === loginModal) {
+            loginModal.style.display = 'none';
+            passwordInput.type = 'password';
+            togglePassword.textContent = 'Show';
+        }
+    };
+</script>
+{% endblock %}

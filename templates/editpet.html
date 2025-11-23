@@ -1,0 +1,124 @@
+{% extends 'layout.html' %} <!--child inheritance from parent-->
+
+{% block button %}
+    <a class="back-btn" href="{{ url_for('index') }}">
+        <i class="fas fa-caret-left"></i>
+        Back
+    </a>
+{% endblock %}
+
+{% block content %}
+    <section id="form">
+        <form action="{{ url_for('edit_pet', id=pet.id) }}" method="POST">
+            <div class="columns">
+                <div class="col1">
+                    <div class="form-container">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" placeholder="Fuzzy Wuzzy" value="{{ pet.name }}">
+                    </div>
+                    <div class="form-container">
+                        <label for="age">Age</label>
+                        <input id="age" name="age" type="text" placeholder="6 months" value="{{ pet.age }}">
+                    </div>
+                    <div class="form-container">
+                        <label for="breed">Breed</label>
+                        <input id="breed" name="breed" type="text" placeholder="American Shorthair" value="{{ pet.breed }}">
+                    </div>
+                    <div class="form-container">
+                        <label for="url"><i class="fas fa-camera"></i> URL</label>
+                        <input id="url" name="url" type="text" placeholder="Photo link" value="{{ pet.url }}">
+                    </div>
+                </div>
+                <div class="col2">
+                    <div class="form-container">
+                        <label for="color">Color</label>
+                        <input id="color" name="color" type="text" placeholder="Grey" value="{{ pet.color }}">
+                    </div>
+                    <div class="form-container">
+                        <label for="size">Size</label>
+                        <input id="size" name="size" type="text" placeholder="Medium" value="{{ pet.size }}">
+                    </div>
+                    <div class="form-container">
+                        <label for="weight">Weight</label>
+                        <input id="weight" name="weight" type="text" placeholder="5lbs" value="{{ pet.weight }}">
+                    </div>
+                    <div class="form-container">
+                        <label for="alt">Image Alt Text</label>
+                        <input id="alt" name="alt" type="text" placeholder="This photo is..." value="{{ pet.url_tag }}">
+                    </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="col1">
+                    <fieldset>
+                        <div>
+                            <legend>Pet Type</legend>
+                            <input id="dog" type="radio" name="pet" value="Dog" {% if pet.pet_type == "Dog" %} checked {% endif %}>
+                            <i class="fas fa-check-circle"></i>
+                            <label for="dog">Dog</label>
+                            <input id="cat" type="radio" name="pet" value="Cat" {% if pet.pet_type == "Cat" %} checked {% endif %}>
+                            <i class="fas fa-check-circle"></i>
+                            <label for="cat">Cat</label>
+                            <input id="other" type="radio" name="pet" value="Other" {% if pet.pet_type == "Other" %} checked {% endif %}>
+                            <i class="fas fa-check-circle"></i>
+                            <label for="other">Other</label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div>
+                            <legend>Gender</legend>
+                            <input id="female" type="radio" name="gender" value="Female" {% if pet.gender == "Female" %} checked {% endif %}>
+                            <i class="fas fa-check-circle"></i>
+                            <label for="female">Female</label>
+                            <input id="male" type="radio" name="gender" value="Male" {% if pet.gender == "Male" %} checked {% endif %}>
+                            <i class="fas fa-check-circle"></i>
+                            <label for="male">Male</label>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col2">
+                    <fieldset>
+                        <div>
+                            <legend>Spayed/Neutered</legend>
+                            <input id="true" type="radio" name="spay" value="Yes" {% if pet.spay == "Yes" %} checked {% endif %}>
+                            <i class="fas fa-check-circle"></i>
+                            <label for="true">Yes</label>
+                            <input id="false" type="radio" name="spay" value="No" {% if pet.spay == "No" %} checked {% endif %}>
+                            <i class="fas fa-check-circle"></i>
+                            <label for="false">No</label>
+                            <input id="na" type="radio" name="spay" value="Unknown" {% if pet.spay == "Unknown" %} checked {% endif %}>
+                            <i class="fas fa-check-circle"></i>
+                            <label for="na">Unkown</label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div>
+                            <legend>Housetrained</legend>
+                            <input id="yes" type="radio" name="housetrained" value="Yes" {% if pet.house_trained == "Yes" %} checked {% endif %}>
+                            <i class="fas fa-check-circle"></i>
+                            <label for="yes">Yes</label>
+                            <input id="no" type="radio" name="housetrained" value="No" {% if pet.house_trained == "No" %} checked {% endif %}>
+                            <i class="fas fa-check-circle"></i>
+                            <label for="no">No</label>
+                            <input id="unkown" type="radio" name="housetrained" value="Unknown" {% if pet.house_trained == "Unknown" %} checked {% endif %}>
+                            <i class="fas fa-check-circle"></i>
+                            <label for="unkown">Unkown</label>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <fieldset id="descr">
+                <div>
+                    <legend>Description</legend>
+                    <label for="description" style="display: none;">Description</label>
+                    <textarea name="description" id="description" cols="30" rows="10" placeholder="This pet is...">{{ pet.description }}</textarea>
+                </div>
+            </fieldset>
+            <div id="form-buttons">
+                <button type="reset">Cancel</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </section>
+    <script src="/static/js/app.js"></script>
+{% endblock %}

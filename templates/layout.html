@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pet Adoption</title>
+    <meta name="description" content="A collection of adoptable pets.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://kit.fontawesome.com/75bde6854e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  </head>
+  <body>
+    <section class="main-header">
+      <a href="{{ url_for('index') }}">
+        <h1 class="header">
+          <i class="fas fa-paw"></i>
+          Pet Adoption
+        </h1>
+      </a>
+      {% block button %} <!-- write the parent template first. block renders in the exact order they appear inside the template. defines where a child template can insert a button-->
+      {% endblock %}
+    </section>
+    {% block content %} <!-- defines where the main page goes -->
+    {% endblock %}
+  </body>
+</html>

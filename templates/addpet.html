@@ -1,0 +1,124 @@
+{% extends 'layout.html' %} <!--child inheritance from parent-->
+
+{% block button %}
+    <a class="back-btn" href="{{ url_for('index') }}">
+        <i class="fas fa-caret-left"></i>
+        Back
+    </a>
+{% endblock %}
+
+{% block content %}
+    <section id="form">
+        <form action="{{ url_for('add_pet') }}" method="POST">
+            <div class="columns">
+                <div class="col1">
+                    <div class="form-container">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" placeholder="Fuzzy Wuzzy">
+                    </div>
+                    <div class="form-container">
+                        <label for="age">Age</label>
+                        <input id="age" name="age" type="text" placeholder="6 months">
+                    </div>
+                    <div class="form-container">
+                        <label for="breed">Breed</label>
+                        <input id="breed" name="breed" type="text" placeholder="American Shorthair">
+                    </div>
+                    <div class="form-container">
+                        <label for="url"><i class="fas fa-camera"></i> URL</label>
+                        <input id="url" name="url" type="text" placeholder="Photo link">
+                    </div>
+                </div>
+                <div class="col2">
+                    <div class="form-container">
+                        <label for="color">Color</label>
+                        <input id="color" name="color" type="text" placeholder="Grey">
+                    </div>
+                    <div class="form-container">
+                        <label for="size">Size</label>
+                        <input id="size" name="size" type="text" placeholder="Medium">
+                    </div>
+                    <div class="form-container">
+                        <label for="weight">Weight</label>
+                        <input id="weight" name="weight" type="text" placeholder="5lbs">
+                    </div>
+                    <div class="form-container">
+                        <label for="alt">Image Alt Text</label>
+                        <input id="alt" name="alt" type="text" placeholder="This photo is...">
+                    </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="col1">
+                    <fieldset>
+                        <div>
+                            <legend>Pet Type</legend>
+                            <input id="dog" type="radio" name="pet" value="Dog">
+                            <i class="fas fa-check-circle"></i>
+                            <label for="dog">Dog</label>
+                            <input id="cat" type="radio" name="pet" value="Cat">
+                            <i class="fas fa-check-circle"></i>
+                            <label for="cat">Cat</label>
+                            <input id="other" type="radio" name="pet" value="Other">
+                            <i class="fas fa-check-circle"></i>
+                            <label for="other">Other</label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div>
+                            <legend>Gender</legend>
+                            <input id="female" type="radio" name="gender" value="Female">
+                            <i class="fas fa-check-circle"></i>
+                            <label for="female">Female</label>
+                            <input id="male" type="radio" name="gender" value="Male">
+                            <i class="fas fa-check-circle"></i>
+                            <label for="male">Male</label>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col2">
+                    <fieldset>
+                        <div>
+                            <legend>Spayed/Neutered</legend>
+                            <input id="true" type="radio" name="spay" value="Yes">
+                            <i class="fas fa-check-circle"></i>
+                            <label for="true">Yes</label>
+                            <input id="false" type="radio" name="spay" value="No">
+                            <i class="fas fa-check-circle"></i>
+                            <label for="false">No</label>
+                            <input id="na" type="radio" name="spay" value="Unknown">
+                            <i class="fas fa-check-circle"></i>
+                            <label for="na">Unkown</label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div>
+                            <legend>Housetrained</legend>
+                            <input id="yes" type="radio" name="housetrained" value="Yes">
+                            <i class="fas fa-check-circle"></i>
+                            <label for="yes">Yes</label>
+                            <input id="no" type="radio" name="housetrained" value="No">
+                            <i class="fas fa-check-circle"></i>
+                            <label for="no">No</label>
+                            <input id="unkown" type="radio" name="housetrained" value="Unknown">
+                            <i class="fas fa-check-circle"></i>
+                            <label for="unkown">Unkown</label>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <fieldset id="descr">
+                <div>
+                    <legend>Description</legend>
+                    <label for="description" style="display: none;">Description</label>
+                    <textarea name="description" id="description" cols="30" rows="10" placeholder="This pet is..."></textarea>
+                </div>
+            </fieldset>
+            <div id="form-buttons">
+                <button type="reset">Cancel</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </section>
+    <script src="/static/js/app.js"></script>
+{% endblock %}

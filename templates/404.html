@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block button %}
+    <a class="add-pet-btn" href="{{ url_for('add_pet') }}" alt="Add Pet">
+        <i class="fas fa-plus"></i>
+        Pet
+    </a>
+{% endblock button %}
+
+{% block content %}
+    <section id="page_not_found_route">
+        <img src="https://media.giphy.com/media/DvyLQztQwmyAM/giphy.gif" alt="Surprised Dog Gif">
+        <h2>Hmm...it seems this page can't be fetched.<i class="fas fa-baseball-ball"></i></h2>
+        <p>{{ msg }}</p>
+        <a href="{{ url_for('index') }}">
+            <button><i class="fas fa-home"></i><i class="fas fa-bone"></i>Go Home</button>
+        </a>
+    </section>
+{% endblock %}

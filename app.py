@@ -1,63 +1,118 @@
-from flask import Flask, jsonify, url_for
-from markupsafe import escape
+from flask import (jsonify, url_for, redirect,
+                   render_template, request,
+                   abort, Flask, flash)
+# flask_login does not handle password hashing or database storage
+from flask_login import login_required, LoginManager, current_user, login_user
+from flask_sqlalchemy import SQLAlchemy
+from extensions import db
+from models import Pet, User
+from werkzeug.security import check_password_hash
+
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///pets.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SECRET_KEY"] = "secret123"
+
+db.init_app(app)
+
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
 
 @app.route("/")
 def index():
-    return 'Hello from Pet adoption\n'
+    pets = Pet.query.all()
+    users = User.query.all()
+    return render_template("index.html", pets=pets, users=users) # render the child who inherits from the parent
 
-@app.route("/meow")
-def cat():
-    return "meow\n"
+@app.route("/login", methods=["POST"])
+def login():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    user = User.query.filter_by(username=username).first()
 
-@app.route("/user/profile/<username>")
-def show_user_profile(username):
-    return f"User {escape(username)}\n"
-
-@app.route("/post/<int:post_id>")
-def show_post_with_int(post_id):
-    return f"Post {post_id}\n"
-
-@app.route("/path/<path:subpath>")
-def show_subpath(subpath):
-    return f"Subpath {escape(subpath)}\n"
-
-@app.route("/user/login/<string:user_name>")
-def user_login(user_name):
-    return f"welcome back {user_name}\n"
-
-@app.route("/test_json")
-def show_json():
-    x = "test1"
-    y = "test2"
-    return jsonify(a=x, z=y)
-# enter a 128 bit identifier writen in the standard 36 bit character text format in the browser
-@app.route("/item/<uuid:item_128bit>")
-def show_uuid_with_json(item_128bit):
-    return jsonify({"item_id": str(item_128bit)})
-
-@app.route("/thing/<uuid:first_thing>")
-def show_uuid(first_thing):
-    return f"show 128 bit of {first_thing}\n"
-
-@app.route("/user/<float:account_balance>")
-def show_account_balance(account_balance):
-    return f"Current Account balance without line of credit: {account_balance}"
-
-@app.route("/projects/")
-def projects():
-    return "The project page"
-
-@app.route("/about")
-def about():
-    return "The about page\n"
+    if user and check_password_hash(user.password, password):
+        login_user(user)
+        return redirect(url_for("index"))
+    else:
+        flash("Invalid username or password", "error")
+        return redirect(url_for("index"))
 
 
-with app.test_request_context():
-    print(url_for("index"))
-    print(url_for("show_user_profile", username="Arnold"))
-    print(url_for("about", next="/"))
+
+@app.route("/add-pet", methods=['GET', 'POST'])
+def add_pet(): # used within the html using jinja patterns {{}} submits the form
+    if request.form: # if there is no form that's been submitted
+        new_pet = Pet(name=request.form['name'], age=request.form['age'],
+                      breed=request.form['breed'], color=request.form['color'],
+                      size=request.form['size'], weight=request.form['weight'],
+                      url=request.form['url'], url_tag=request.form['alt'],
+                      pet_type=request.form['pet'], gender=request.form['gender'],
+                      spay=request.form['spay'], house_trained=request.form['housetrained'],
+                      description=request.form['description'])
+        db.session.add(new_pet)
+        db.session.commit()
+        return redirect(url_for('index'))# redirect the user to the homepage after adding a pet
+    return render_template("addpet.html")
+
+# update to accept the id variable and enter the image from the url href of jinja and url_for module in the index.html file
+# how to pass information from one page to another without using a new route/view
+@app.route("/pet/<id>") # use the id to fint the pet and sent it to the template
+def pet(id): # 127.0.0.1:8000/pet/1
+    pet = Pet.query.get_or_404(id)
+    return render_template("pet.html", pet=pet)
+    
+
+@app.route("/edit/<id>", methods=["GET", "POST"])
+def edit_pet(id):
+    pet = Pet.query.get_or_404(id)
+    if request.form:
+        pet.name = request.form['name']
+        pet.age = request.form['age']
+        pet.breed = request.form['breed']
+        pet.color = request.form['color']
+        pet.size = request.form['size']
+        pet.weight = request.form['weight']
+        pet.url = request.form['url']
+        pet.url_tag = request.form['alt']
+        pet.name = request.form['name']
+        pet.pet_type = request.form['pet']
+        pet.gender = request.form['gender']
+        pet.spay = request.form['spay']
+        pet.house_trained = request.form['housetrained']
+        pet.description = request.form['description']
+        db.session.commit()
+        return redirect(url_for("index")) # redirect afterwards to homepage
+    return render_template("editpet.html", pet=pet)
+
+
+
+# the route deletes any id. it requires authentication, login manager
+@app.route("/delete/<int:id>", methods=["POST"])
+@login_required
+def delete_pet(id):
+    pet = Pet.query.get_or_404(id) #flask sqlalchemy queries for views
+    # current_user is a proxy from flask
+    if not pet.helper_function_check_deletion_permission(current_user): # typing in the browser /delete/1 will permanently delete the object with id 1
+        abort(403)
+    db.session.delete(pet)
+    db.session.commit()
+    return redirect(url_for("index")) # redirect to homepage aftwerwards action
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template("404.html", msg=error), 404
+    
 
 if __name__ == "__main__":
+    # use a proxy
+    with app.app_context(): # keeps track of application-level data throughout the app during a request, a command-line command, or else...
+        db.create_all()
     app.run(debug=True, port=8000, host="127.0.0.1")

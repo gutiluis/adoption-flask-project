@@ -1,0 +1,597 @@
+/* Project Styles */
+
+:root {
+    --primary: #0f3305;
+    --secondary: #BAE8E8;
+    --accent: #FFD803;
+    --background: #FFFFFE;
+}
+
+* {
+    font-family: 'Times New Roman', 'Arial', sans-serif; /* if not roboto use arial*/
+}
+
+body {
+    background-color: var(--background);
+}
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6, 
+p, 
+button, 
+a,
+label,
+legend {
+    color: var(--primary);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Header Styles */
+
+.header i, 
+.card i {
+    color: var(--secondary);
+}
+
+.main-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.main-header h1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 56px;
+}
+
+.main-header .add-pet-btn,
+.main-header .back-btn,
+#not-found a {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    background: var(--accent);
+    border-radius: 20px;
+    border: none;
+    width: 143px;
+    height: 47px;
+}
+
+.main-header .add-pet-btn,
+.main-header .back-btn {
+    padding: 10px 15px 10px 15px;
+}
+
+.main-header .add-pet-btn i.fa-plus {
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 21px;
+    position: relative;
+    bottom: 2px;
+    margin-right: 5px;
+}
+
+/* Homepage - Card Style */
+
+.card {
+    margin: auto;
+    position: relative;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
+    width: 292px;
+    height: 330px;
+    margin-bottom: 71px;
+    border-radius: 20px;
+}
+
+.card .fas {
+    color: var(--accent);
+}
+
+.card img {
+    width: 292px;
+    height: 205px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.card button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background: none;
+    border: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.card h2 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: left;
+    display: inline-block;
+    margin-right: 88px;
+    margin-left: 32px;
+    margin-top: 18px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--secondary);
+}
+
+.card h3 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    display: inline-block;
+}
+
+.card p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    display: block;
+    margin-left: 32px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    width: 228px;
+    height: 40px;
+    overflow: hidden;
+}
+
+/* Form Styles */
+
+.main-header button i.fa-caret-left {
+    margin-right: 3px;
+}
+
+#form {
+    width: 90%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+#form .form-container {
+    width: fit-content;
+    margin: auto;
+}
+
+#form .form-container input {
+    display: block;
+    height: 61px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    border: 2px solid var(--secondary);
+    border-radius: 20px;
+    margin-bottom: 40px;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+#form .form-container label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    width: 80px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--secondary);
+}
+
+#form fieldset {
+    border: none;
+    margin-bottom: 30px;
+}
+
+#form fieldset div {
+    text-align: center;
+}
+
+#form legend {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    background-color: var(--secondary);
+
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#form fieldset input {
+    visibility: hidden;
+    width: 0px;
+    height: 0px;
+}
+
+#form fieldset i {
+    color: var(--primary);
+    font-size: 24px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+#form fieldset input[type='radio']:checked + i {
+    color: var(--accent);
+}
+
+#form fieldset label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    margin-right: 15px;
+}
+
+#form textarea {
+    margin-top: 20px;
+    width: 85%;
+    border: 2px solid var(--secondary);
+    border-radius: 20px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    padding: 20px;
+}
+
+#form #form-buttons {
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 50px;
+}
+
+#form button {
+    width: 143px;
+    height: 47px;
+    background: none;
+    border-radius: 20px;
+    margin: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+#form button[type="reset"] {
+    border: 2px solid var(--accent);
+    margin-right: 27px;
+}
+
+#form button[type="submit"] {
+    border: none;
+    background-color: var(--accent);
+}
+
+/* Pet Styles */
+
+#pet-data {
+    text-align: center;
+    margin: auto;
+    margin-bottom: 100px;
+    width: 90%;
+}
+
+#pet-data img {
+    margin: auto;
+    width: 242px;
+    height: 242px;
+    border-radius: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    display: block;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.25);
+    object-fit: cover;
+}
+
+#pet-data div {
+    text-align: left;
+}
+
+#pet-data #pet-name {
+    text-align: center;
+}
+
+#pet-data h2 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 28px;
+    border-bottom: 2px solid var(--secondary);
+    width: auto;
+    display: inline-block;
+    padding: 10px;
+}
+
+#pet-data p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 28px;
+    display: inline-block;
+    margin-left: 40px;
+}
+
+#pet-data #description p {
+    display: block;
+    text-align: left;
+    margin-left: 0px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 21px;
+}
+
+#edit-delete {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#edit-delete a {
+    text-decoration: none;
+    font-size: 24px;
+    color: var(--primary);
+}
+
+#edit-delete a i {
+    margin-right: 5px;
+}
+
+#edit-delete a:first-child {
+    margin-right: 50px;
+}
+
+#edit-delete a:hover{
+    color: var(--accent);
+}
+
+/* 404 page */
+
+#not-found {
+    text-align: center;
+    margin-top: 100px;
+}
+
+#not-found img {
+    border-radius: 20px;
+}
+
+#not-found p {
+    margin-bottom: 100px;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translate3d(0,0,0);
+    }
+    10% {
+        transform: translate3d(0,-200px,0);
+    }
+    30% {
+        transform: translate3d(0,0,0);
+    }
+    40% {
+        transform: translate3d(0,-100px,0);
+    }
+    60% {
+        transform: translate3d(0,0,0);
+    }
+    70% {
+        transform: translate3d(0,-50px,0);
+    }
+    75% {
+        transform: translate3d(0,0,0);
+    }
+    85% {
+        transform: translate3d(0,-25px,0);
+    }
+    90% {
+        transform: translate3d(0,0,0);
+    }
+    95% {
+        transform: translate3d(0,-10px,0);
+    }
+    100% {
+        transform: translate3d(0,0,0);
+    }
+}
+
+#not-found h2 i {
+    margin-left: 20px;
+    color: var(--accent);
+    animation: bounce 1.5s cubic-bezier(.5,0.05,1,.5);
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+}
+
+#not-found a {
+    text-decoration: none;
+    width: 200px;
+    height: 60px;
+    padding: 10px 15px;
+}
+
+#not-found .fa-bone {
+    font-size: 14px;
+    transform: translateX(-12px) translateY(10px) rotate(135deg);
+}
+
+
+
+/* Media Queries */
+
+@media (min-width: 550px){
+
+    /* Pet Page */
+
+    #pet-data {
+        width: 80%;
+    }
+}
+
+/* iPad */
+
+@media (min-width: 768px){
+
+    /* Form Page */
+    #form fieldset {
+        margin: auto;
+        margin-bottom: 30px;
+        width: 50%;
+    }
+
+    /* Pet Page */
+
+    #pet-data {
+        width: 50%;
+    }
+
+    #pet-data img {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+/* Desktops and Laptops */
+
+@media (min-width: 1024px){
+
+    .main-header h1 {
+        display: inline-block;
+        margin-right: 100px;
+    }
+
+    /* Homepage Page */
+
+    #filter #filter-button {
+        display: none;
+    }
+
+    #filter .filters {
+        display: inline-block;
+    }
+
+    #filter .filters {
+        margin-bottom: 50px;
+    }
+
+    #pet-cards {
+        width: 80%;
+        margin: auto;
+        text-align: center;
+    }
+
+    #pet-cards .card {
+        display: inline-block;
+    }
+
+    #pet-cards .card {
+        margin-right: 50px;
+    }
+
+    /* Form Page */
+
+    #form .columns {
+        width: 75%;
+        margin: auto;
+        text-align: center;
+    }
+
+    #form .form-container {
+        text-align: left;
+    }
+
+    #form .col1 {
+        margin-right: 50px;
+    }
+    #form fieldset {
+        width: 100%;
+    }
+
+    #form #descr{
+        width: 75%;
+    }
+
+    /* Pet Page */
+
+    #pet-data {
+        width: 65%;
+    }
+
+    #pet-data #left-col, 
+    #pet-data #right-col {
+        display: inline-block;
+    }
+
+    #pet-data #right-col {
+        margin-left: 60px;
+    }
+
+    #pet-data #description {
+        width: 650px;
+        margin: auto;
+    }
+}
+
+/* Desktop Screens */
+
+@media (min-width: 1224px){
+
+    /* Form Page */
+
+    #form .col1, #form .col2 {
+        display: inline-block;
+    }
+
+    /* Headers */
+
+    .main-header h1 {
+        margin-right: 400px;
+    }
+}
+
+/* Large Screens */
+
+@media (min-width: 1824px){
+
+    .main-header h1 {
+        margin-right: 600px;
+    }
+
+    /* Form Page */
+
+    #form #descr {
+        width: 45%;
+    }
+
+    /* Pet Page */
+
+    #pet-data #right-col {
+        margin-left: 100px;
+    }
+}
+
+#page_not_found_route {
+    background-color: green;
+    text-align: center;
+    min-height: 400px;
+    padding: 50px 0;
+    height: 50vh;
+    border: 15px solid black;
+    margin: 1em;
+}
